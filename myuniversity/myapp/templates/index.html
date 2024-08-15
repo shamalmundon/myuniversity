@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+    <head>
+      {% load static %}
+        <script src="https://kit.fontawesome.com/01daf65035.js" crossorigin="anonymous"></script>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="stylesheet" href="./home.css">
+        <style>
+          @keyframes appear{
+    from{
+        opacity: 0;
+        transform: translateX(-100px);
+
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+    @keyframes appear2{
+        from{
+            opacity: 0;
+            transform: translateX(100px)
+    
+        }
+        to{
+            opacity: 1;
+            transform: translateX(0px);
+        }
+
+}
+#anim {
+            background: url("{% static 'images/imgg1.jpg' %}") no-repeat center center;
+            background-size: cover;
+            color: white; /* Ensure text is readable on top of background */
+        }
+        .header-content {
+            background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a dark overlay for better text readability */
+            padding: 30px; /* Adjust padding if needed */
+        }
+        .header-content h1, .header-content p {
+            color: white; /* Ensure text is readable */
+        }
+#card-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        #department-card {
+            /* Add custom styles for the cards if needed */
+        }
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg " style="background-color:azure;">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">University</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item ms-5">
+                    <a class="nav-link" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item ms-3">
+                    <a class="nav-link" aria-current="page" href="#card-container">Department</a>
+                  </li>
+                </ul>
+                <form class="d-flex gap-3" role="search">
+      
+                <a href="{% url 'reg' %}" class="btn btn-outline-success" type="submit">EXAM REGISTER</a>
+                  
+                <a href="{% url 'login' %}" class="btn btn-outline-info me-5" type="submit">LOGIN</a>
+                <a href="{% url 'logout' %}" class="btn btn-outline-success" type="submit">LOGOUT</a>
+
+                <a href="{% url 'signup' %}" class="btn btn-outline-success" type="submit">SIGNUP</a>
+                </form>
+              </div>
+            </div>
+          </nav>
+
+          <!-- main body -->
+
+          <header class="bg-dark py-5" id="anim">
+            <div class="container px-5 header-content">
+                <div class="row gx-5 align-items-center justify-content-center">
+                    <div class="col-lg-8 col-xl-7 col-xxl-6">
+                        <div class="my-5 text-center text-xl-start">
+                            <h1 class="display-5 fw-bolder mb-5">Find your university here</h1>
+                            <p class="lead fw-normal mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate magnam quod ut dolorem inventore libero nulla at a necessitatibus voluptatibus. Blanditiis cupid</p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3 mt-5" href="#id1">Search course</a>
+                                <a class="btn btn-outline-light btn-lg px-4 mt-5" href="#!">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
+                        <img class="img-fluid rounded-3 my-5" src="{% static 'images/logo.jpg' %}" alt="University Image" height="50%">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+          <!-- main body ends -->
+
+
+          <!-- university list -->
+
+          <div class="container mt-5" id="card-container">
+            <h2 class="d-flex justify-content-center mb-5 mt-5">Department Details</h2>
+            <hr>
+            <div class="row">
+                {% for i in dep %}
+                    <div class="col-md-4 mb-4" id="department-card">
+                        <div class="card" style="width: 100%;">
+                            <img src="{{ i.image.url }}" class="card-img-top" alt="{{ i.department_name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ i.department_name }}</h5>
+                                <p class="card-text">{{ i.description }}</p>
+                                <a href="{% url 'list' %}" class="btn btn-primary">View</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+          <!-- university list ends-->
+
+          <!-- course details -->
+
+          <div  id='id1' class="container mt-5" id="anim">
+            <div class="row d-flex justify-content-evenly" >
+                <h2 class="d-flex justify-content-center mb-5 mt-5">Course Details</h2><hr>
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                    </div>
+                  </div>
+
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                    </div>
+                  </div>
+
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                    </div>
+                  </div>
+
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                    </div>
+                  </div>
+                
+            </div>
+          </div>
+
+          <!-- course details ends-->
+
+          <!-- about -->
+
+          <section class="py-5" id="anim2">
+            <div class="container px-5 my-5">
+                <h2 class="d-flex justify-content-center mt-5 mb-5">About us</h2><hr>
+                <div class="row gx-5 mt-2">
+                    <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0">A better way to start building your future</h2></div>
+                    <div class="col-lg-8">
+                        <div class="row gx-5 row-cols-1 row-cols-md-2">
+                            <div class="col mb-5 h-100">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3 p-1" style="width: 30px;"><i class="fa-solid fa-house"></i></div>
+                                <h2 class="h5">Featured title</h2>
+                                <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                            </div>
+                            <div class="col mb-5 h-100">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3 p-1" style="width: 30px;"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                <h2 class="h5">Featured title</h2>
+                                <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                            </div>
+                            <div class="col mb-5 mb-md-0 h-100">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3 p-1" style="width: 30px;"><i class="fa-solid fa-star"></i></div>
+                                <h2 class="h5">Featured title</h2>
+                                <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                            </div>
+                            <div class="col h-100">
+                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3 p-1" style="width: 30px;"><i class="fa-solid fa-comment"></i></div>
+                                <h2 class="h5">Featured title</h2>
+                                <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- about last -->
+
+        <section class="page-section mb-5" id="anim">
+            <div class="container px-4 px-lg-5">
+                <h2 class="text-center mt-0">At Your Service</h2>
+                <hr class="divider" />
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><i class="fa-solid fa-house fa-2x"></i></div>
+                            <h3 class="h4 mb-2">Sturdy Themes</h3>
+                            <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><i class="fa-solid fa-magnifying-glass fa-2x"></i></div>
+                            <h3 class="h4 mb-2">Up to Date</h3>
+                            <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><i class="fa-solid fa-star fa-2x"></i></div>
+                            <h3 class="h4 mb-2">Ready to Publish</h3>
+                            <p class="text-muted mb-0">You can use this design as is, or you can make changes!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><i class="fa-solid fa-comment fa-2x"></i></div>
+                            <h3 class="h4 mb-2">Made with Love</h3>
+                            <p class="text-muted mb-0">Is it really open source if it's not made with love?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- footer -->
+
+        <footer class=" py-4 mt-auto mt-5" style="background-color:azure">
+            <div class="container px-5">
+                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                    <div class="col-auto"><div class="small m-0">Copyright &copy; Your Website 2023</div></div>
+                    <div class="col-auto">
+                        <a class="small" href="#!">Privacy</a>
+                        <span class="mx-1">&middot;</span>
+                        <a class="small" href="#!">Terms</a>
+                        <span class="mx-1">&middot;</span>
+                        <a class="small" href="#!">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+        
+    </body>
+</html>
